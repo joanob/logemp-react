@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-export interface CompanyState {
-	name: string
-	money: number
-}
+import Company from "../../types/Company"
+
+export interface CompanyState extends Company {}
 
 const initialState: CompanyState = {
 	name: "",
