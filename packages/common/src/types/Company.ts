@@ -1,4 +1,4 @@
-export default interface Company {
+export interface Company {
 	name: string
 	money: number
 }

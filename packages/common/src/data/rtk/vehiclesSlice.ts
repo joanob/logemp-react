@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { v4 as uuid } from "uuid"
-import Vehicle from "../../types/Vehicle"
+import { Vehicle } from "../../types/Vehicle"
 
 export interface VehiclesState {
 	vehicles: Map<Vehicle["id"], Vehicle>
@@ -30,16 +30,16 @@ export const vehiclesSlice = createSlice({
 			vehicle.name = action.payload.name
 			state.vehicles.set(vehicle.id, vehicle)
 		},
-		setLocation: (
+		setCoord: (
 			state,
 			action: PayloadAction<{
 				id: Vehicle["id"]
-				location: Vehicle["location"]
+				coord: Vehicle["coord"]
 			}>
 		) => {
 			const vehicle = state.vehicles.get(action.payload.id)
 			if (vehicle === undefined) return
-			vehicle.location = action.payload.location
+			vehicle.coord = action.payload.coord
 			state.vehicles.set(vehicle.id, vehicle)
 		}
 	}

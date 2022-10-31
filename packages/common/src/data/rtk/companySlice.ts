@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-import Company from "../../types/Company"
+import { Company } from "../../types/Company"
 
 export interface CompanyState extends Company {}
 

@@ -1,9 +1,9 @@
-import Location from "./Location"
+import { Coordinates } from "./Location"
 
-export default interface Vehicle {
+export interface Vehicle {
 	id: string
 	name: string
-	location: Location
+	coord: Coordinates
 	speed: number
 	maxDistance: number
 }
