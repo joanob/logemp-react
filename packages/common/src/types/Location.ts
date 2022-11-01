@@ -1,3 +1,4 @@
+// Coordinates between -1024 and 1024
 export interface Coordinates {
 	x: number
 	y: number

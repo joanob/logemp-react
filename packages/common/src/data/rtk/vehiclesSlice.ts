@@ -45,4 +45,6 @@ export const vehiclesSlice = createSlice({
 	}
 })
 
+export const { addVehicle, setName, setCoord } = vehiclesSlice.actions
+
 export default vehiclesSlice.reducer
