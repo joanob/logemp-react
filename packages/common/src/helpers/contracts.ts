@@ -12,10 +12,10 @@ const calculateEarnings = (distance: number): number => {
 }
 
 export const createContract = (): Contract => {
-	const from = locations[Math.random() * locations.length]
+	const from = locations[Math.floor(Math.random() * locations.length)]
 	let to: Location
 	do {
-		to = locations[Math.random() * locations.length]
+		to = locations[Math.floor(Math.random() * locations.length)]
 	} while (from.id === to.id)
 	const distance = calculateDistance(from.coord, to.coord)
 	const earnings = calculateEarnings(distance)
@@ -30,4 +30,12 @@ export const createContract = (): Contract => {
 		vehicle: null,
 		start: null
 	}
+}
+
+export const getActiveContracts = (contracts: Contract[]): Contract[] => {
+	return contracts.filter((contract) => contract.vehicle !== null)
+}
+
+export const getAvailableContracts = (contracts: Contract[]): Contract[] => {
+	return contracts.filter((contract) => contract.vehicle === null)
 }

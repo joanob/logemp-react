@@ -1,7 +1,12 @@
 import { useState } from "react"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import { TextField, Button } from "@mui/material"
-import { setCompanyName, useAppSelector, useAppDispatch } from "common"
+import {
+	setCompanyName,
+	useAppSelector,
+	useAppDispatch,
+	addVehicle
+} from "common"
 import Home from "./routes/Home"
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
@@ -31,6 +36,15 @@ const App = (): JSX.Element => {
 				<Button
 					onClick={() => {
 						dispatch(setCompanyName(name))
+						dispatch(
+							addVehicle({
+								id: "v1",
+								name: "Vehicle 1",
+								coord: { x: 0, y: 0 },
+								speed: 5,
+								maxDistance: 200
+							})
+						)
 					}}
 				>
 					Create
