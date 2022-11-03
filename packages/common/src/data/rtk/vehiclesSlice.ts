@@ -4,11 +4,11 @@ import { v4 as uuid } from "uuid"
 import { Vehicle } from "../../types/Vehicle"
 
 export interface VehiclesState {
-	vehicles: Map<Vehicle["id"], Vehicle>
+	vehicles: Vehicle[]
 }
 
 const initialState: VehiclesState = {
-	vehicles: new Map<Vehicle["id"], Vehicle>()
+	vehicles: []
 }
 
 export const vehiclesSlice = createSlice({
@@ -18,17 +18,23 @@ export const vehiclesSlice = createSlice({
 		addVehicle: (state, action: PayloadAction<Vehicle>) => {
 			do {
 				action.payload.id = uuid()
-			} while (state.vehicles.has(action.payload.id))
-			state.vehicles.set(action.payload.id, action.payload)
+			} while (
+				state.vehicles.filter((vehicles) => vehicles.id === action.payload.id)
+					.length !== 0
+			)
+			state.vehicles.push(action.payload)
 		},
 		setName: (
 			state,
 			action: PayloadAction<{ id: Vehicle["id"]; name: Vehicle["name"] }>
 		) => {
-			const vehicle = state.vehicles.get(action.payload.id)
-			if (vehicle === undefined) return
-			vehicle.name = action.payload.name
-			state.vehicles.set(vehicle.id, vehicle)
+			const vehicles = state.vehicles.find(
+				(vehicles) => vehicles.id === action.payload.id
+			)
+
+			if (vehicles === undefined) return
+
+			vehicles.name = action.payload.name
 		},
 		setCoord: (
 			state,
@@ -37,10 +43,13 @@ export const vehiclesSlice = createSlice({
 				coord: Vehicle["coord"]
 			}>
 		) => {
-			const vehicle = state.vehicles.get(action.payload.id)
-			if (vehicle === undefined) return
-			vehicle.coord = action.payload.coord
-			state.vehicles.set(vehicle.id, vehicle)
+			const vehicles = state.vehicles.find(
+				(vehicles) => vehicles.id === action.payload.id
+			)
+
+			if (vehicles === undefined) return
+
+			vehicles.coord = action.payload.coord
 		}
 	}
 })
