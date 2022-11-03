@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { Routes, Route, BrowserRouter } from "react-router-dom"
 import { TextField, Button } from "@mui/material"
 import { setCompanyName, useAppSelector, useAppDispatch } from "common"
 import Home from "./routes/Home"
+import Header from "./components/Header"
+import Navbar from "./components/Navbar"
 import Clear from "./Clear"
 
 /**
@@ -15,17 +17,6 @@ const App = (): JSX.Element => {
 	const companyName = useAppSelector((state) => state.company.name)
 
 	const [name, setName] = useState("")
-
-	const router = createBrowserRouter([
-		{
-			path: "/",
-			element: <Home />
-		},
-		{
-			path: "/clear",
-			element: <Clear />
-		}
-	])
 
 	if (companyName == null || companyName === "") {
 		return (
@@ -48,6 +39,15 @@ const App = (): JSX.Element => {
 		)
 	}
 
-	return <RouterProvider router={router} />
+	return (
+		<BrowserRouter>
+			<Header />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/clear" element={<Clear />} />
+			</Routes>
+			<Navbar />
+		</BrowserRouter>
+	)
 }
 export default App
