@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react"
-import { addContract, setVehicle, useAppDispatch, useAppSelector } from "common"
+import {
+	addContract,
+	setContractVehicle,
+	useAppDispatch,
+	useAppSelector
+} from "common"
 import {
 	createContract,
 	getActiveContracts,
@@ -17,6 +22,7 @@ const Home = (): JSX.Element => {
 	const [availableContracts, setAvailableContracts] = useState<Contract[]>([])
 
 	if (contracts.length === 0) {
+		dispatch(addContract(createContract()))
 		dispatch(addContract(createContract()))
 	}
 
@@ -39,9 +45,7 @@ const Home = (): JSX.Element => {
 							{contract.from} -&gt; {contract.to}{" "}
 							<button
 								onClick={() => {
-									dispatch(
-										setVehicle({ id: contract.id, vehicle: vehicles[0].id })
-									)
+									setContractVehicle(contract.id, vehicles[0].id)
 								}}
 							>
 								Go
