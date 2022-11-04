@@ -8,7 +8,7 @@ const earningsperDistance = 1.25
 const calculateEarnings = (distance: number): number => {
 	const baseEarnings = distance * earningsperDistance
 	const extra = baseEarnings * (Math.random() * 0.1 - 0.05)
-	return baseEarnings + extra
+	return Math.floor(baseEarnings + extra)
 }
 
 export const createContract = (): Contract => {

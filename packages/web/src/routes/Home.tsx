@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import {
 	addContract,
+	checkContracts,
 	setContractVehicle,
+	startContractNow,
 	useAppDispatch,
 	useAppSelector
 } from "common"
@@ -27,18 +29,38 @@ const Home = (): JSX.Element => {
 	}
 
 	useEffect(() => {
+		checkContracts()
 		setActiveContracts(getActiveContracts(contracts))
 		setAvailableContracts(getAvailableContracts(contracts))
 	}, [contracts])
 
+	const waiting = activeContracts.filter((contract) => contract.start === null)
+	const ongoing = activeContracts.filter((contract) => contract.start !== null)
+
 	return (
 		<main>
 			<section>
-				{activeContracts.map((contract) => {
+				{ongoing.map((contract) => {
 					return <article key={contract.id}>{contract.id}</article>
 				})}
 			</section>
-			<div>
+			<section>
+				{waiting.map((contract) => {
+					return (
+						<article key={contract.id}>
+							{contract.from} -&gt; {contract.to}{" "}
+							<button
+								onClick={() => {
+									startContractNow(contract.id)
+								}}
+							>
+								Start
+							</button>
+						</article>
+					)
+				})}
+			</section>
+			<section>
 				{availableContracts.map((contract) => {
 					return (
 						<article key={contract.id}>
@@ -53,7 +75,7 @@ const Home = (): JSX.Element => {
 						</article>
 					)
 				})}
-			</div>
+			</section>
 		</main>
 	)
 }

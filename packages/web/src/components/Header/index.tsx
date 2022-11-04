@@ -1,5 +1,4 @@
 import { useAppSelector } from "common"
-import React from "react"
 
 const Header = (): JSX.Element => {
 	const company = useAppSelector((state) => state.company)
