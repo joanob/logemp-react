@@ -24,7 +24,7 @@ export const vehiclesSlice = createSlice({
 			)
 			state.vehicles.push(action.payload)
 		},
-		setName: (
+		setVehicleName: (
 			state,
 			action: PayloadAction<{ id: Vehicle["id"]; name: Vehicle["name"] }>
 		) => {
@@ -54,6 +54,6 @@ export const vehiclesSlice = createSlice({
 	}
 })
 
-export const { addVehicle, setName, setCoord } = vehiclesSlice.actions
+export const { addVehicle, setVehicleName, setCoord } = vehiclesSlice.actions
 
 export default vehiclesSlice.reducer

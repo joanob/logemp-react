@@ -31,11 +31,3 @@ export const createContract = (): Contract => {
 		start: null
 	}
 }
-
-export const getActiveContracts = (contracts: Contract[]): Contract[] => {
-	return contracts.filter((contract) => contract.vehicle !== null)
-}
-
-export const getAvailableContracts = (contracts: Contract[]): Contract[] => {
-	return contracts.filter((contract) => contract.vehicle === null)
-}
