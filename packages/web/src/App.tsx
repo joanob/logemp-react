@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import { TextField, Button } from "@mui/material"
-import { useAppSelector, createCompany } from "common"
 import Home from "./routes/Home"
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
 import Clear from "./Clear"
+import { game } from "common/src/app"
 
 /**
  * App is the main component.
@@ -13,7 +13,7 @@ import Clear from "./Clear"
  * Serves as router when user already has a company and displays company creation form otherwise.
  */
 const App = (): JSX.Element => {
-	const companyName = useAppSelector((state) => state.company.name)
+	const companyName = game.useCompany().name
 
 	const [name, setName] = useState("")
 
@@ -29,7 +29,7 @@ const App = (): JSX.Element => {
 				/>
 				<Button
 					onClick={() => {
-						createCompany(name)
+						game.setCompanyName(name)
 					}}
 				>
 					Create

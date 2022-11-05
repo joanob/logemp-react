@@ -1,13 +1,12 @@
-import { store } from "common"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { Provider } from "react-redux"
+import { Wrapper } from "common"
 import App from "./App"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
-		<Provider store={store}>
+		<Wrapper>
 			<App />
-		</Provider>
+		</Wrapper>
 	</React.StrictMode>
 )

@@ -1,7 +1,8 @@
-import { useAppSelector } from "common"
+import { game } from "common"
 
 const Header = (): JSX.Element => {
-	const company = useAppSelector((state) => state.company)
+	const company = game.useCompany()
+
 	return (
 		<header>
 			{company.name} - - - - - {company.money}

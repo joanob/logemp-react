@@ -1,57 +1,44 @@
-import { useState, useEffect } from "react"
-import {
-	addContract,
-	checkContracts,
-	setContractVehicle,
-	startContractNow,
-	useAppDispatch,
-	useAppSelector
-} from "common"
-import {
-	createContract,
-	getActiveContracts,
-	getAvailableContracts
-} from "common/src/helpers/contracts"
-import { Contract } from "common/src/types/Contract"
+import { useEffect } from "react"
+import { game } from "common"
 
 const Home = (): JSX.Element => {
-	const dispatch = useAppDispatch()
-	const contracts = useAppSelector((state) => state.contracts.contracts)
-	const vehicles = useAppSelector((state) => state.vehicles.vehicles)
-
-	const [activeContracts, setActiveContracts] = useState<Contract[]>([])
-
-	const [availableContracts, setAvailableContracts] = useState<Contract[]>([])
-
-	if (contracts.length === 0) {
-		dispatch(addContract(createContract()))
-		dispatch(addContract(createContract()))
-	}
+	const ongoingContracts = game.useOngoingContracts()
+	const activeContracts = game.useActiveContracts()
+	const availableContracts = game.useAvailableContracts()
 
 	useEffect(() => {
-		checkContracts()
-		setActiveContracts(getActiveContracts(contracts))
-		setAvailableContracts(getAvailableContracts(contracts))
-	}, [contracts])
+		const interval = setInterval(() => {
+			game.checkContracts()
+		}, 1000)
 
-	const waiting = activeContracts.filter((contract) => contract.start === null)
-	const ongoing = activeContracts.filter((contract) => contract.start !== null)
+		return () => {
+			clearInterval(interval)
+		}
+	}, [])
 
 	return (
 		<main>
 			<section>
-				{ongoing.map((contract) => {
-					return <article key={contract.id}>{contract.id}</article>
+				{ongoingContracts.map((contract) => {
+					if (contract.vehicle === null) return null
+
+					const vehicle = game.getVehicleByID(contract.vehicle)
+					if (vehicle === undefined) return null
+
+					const secondsToComplete = Math.floor(
+						contract.distance / (vehicle.speed / 60)
+					)
+					return <article key={contract.id}>{secondsToComplete}s</article>
 				})}
 			</section>
 			<section>
-				{waiting.map((contract) => {
+				{activeContracts.map((contract) => {
 					return (
 						<article key={contract.id}>
 							{contract.from} -&gt; {contract.to}{" "}
 							<button
 								onClick={() => {
-									startContractNow(contract.id)
+									game.startContractNow(contract.id)
 								}}
 							>
 								Start
@@ -67,7 +54,7 @@ const Home = (): JSX.Element => {
 							{contract.from} -&gt; {contract.to}{" "}
 							<button
 								onClick={() => {
-									setContractVehicle(contract.id, vehicles[0].id)
+									game.setContractVehicle(contract.id)
 								}}
 							>
 								Go
