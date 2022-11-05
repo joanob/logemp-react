@@ -1,3 +1,3 @@
-export * from "./company"
+export { Wrapper } from "./rtk/Wrapper"
 
-export * from "./contracts"
+export { game } from "./rtk"

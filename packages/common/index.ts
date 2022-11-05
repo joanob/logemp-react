@@ -1,6 +1,3 @@
-export * from "./src/data/rtk"
-// NO exportar tot, sols app selector. Dispatch i actions no
+export { game, Wrapper } from "./src/app"
 
 export * from "./src/helpers"
-
-export * from "./src/app"

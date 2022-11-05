@@ -5,7 +5,7 @@ const Clear = (): JSX.Element => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		localStorage.removeItem("appState")
+		localStorage.removeItem("logemp")
 
 		navigate("/")
 	}, [navigate])
