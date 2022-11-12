@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
-import { TextField, Button } from "@mui/material"
 import Home from "./routes/Home"
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
@@ -20,20 +19,20 @@ const App = (): JSX.Element => {
 	if (companyName == null || companyName === "") {
 		return (
 			<div>
-				<TextField
-					variant="standard"
+				<input
+					type="text"
 					value={name}
 					onChange={(e) => {
 						setName(e.target.value)
 					}}
 				/>
-				<Button
+				<button
 					onClick={() => {
 						game.setCompanyName(name)
 					}}
 				>
 					Create
-				</Button>
+				</button>
 			</div>
 		)
 	}
