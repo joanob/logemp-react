@@ -1,0 +1,21 @@
+.link {
+    width: 80%;
+    height: 80%;
+    display: grid;
+    place-items: center;
+    border-radius: 30px;
+}
+
+.link a, 
+.link a:hover, 
+.link a:active {
+    color: black;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.linkActive {
+    composes: link;
+    background-color: #cecece;
+}

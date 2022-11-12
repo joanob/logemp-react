@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 import Home from "./routes/Home"
-import Header from "./components/Header"
-import Navbar from "./components/Navbar"
+import Header from "./layout/Header"
+import Navbar from "./layout/Navbar/BottomFixedNavbar"
 import Clear from "./Clear"
 import { game } from "common/src/app"
 
