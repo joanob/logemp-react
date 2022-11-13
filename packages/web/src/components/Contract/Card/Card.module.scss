@@ -1,0 +1,53 @@
+.card {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #cbf4f4;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.progress {
+    grid-column: 1/3;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.progressBar {
+    flex-grow: 1;
+    margin: 0 3px;
+    height: 15px;
+    border-radius: 30px;
+    background-color: #eee;
+    position: relative;
+}
+
+.progressBarText {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: 5px;
+    font-size: 15px;
+}
+
+.progressBarDone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 30px;
+    background-color: #56bbbb;
+}
+
+
+
+
+/* LA IDEA ES TINDRE UN GRID */
+/* <- FROM       DISTANCE */
+/* -> TO         EARNING */
+/* Fletxa que ix roja, que entra verda */
+/* Baix posar tems restant per a que caduque i botó per a seleccionar vehicle */
+/* En waiting el de seleccionar vehicle canviaria per començar. Deuria mostrar un icono de vehicle com a que ja hi ha un vehicle seleccionat, i que eixe icono permitira canviar vehicle en el futur (i vore datos del vehicle seleccionat com el temps que tardaria en completar-ho) */
+/* Per a ongoing la última fila es canvia per la barra de progrés i el temps que queda per acabar */
